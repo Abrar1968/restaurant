@@ -3,9 +3,9 @@
 @section('meta_description', 'Explore our curated halal menus — Malay, Western, Indian & fusion cuisines for corporate catering in KL & Klang Valley.')
 @section('content')
 
-    {{-- Hero Section --}}
+    {{-- Center Hero Column --}}
     @include('components.front.hero', [
-        'headline' => $hero?->headline ?? 'Our Curated Menus',
+        'headline' => $hero?->headline ?? 'Our Menus Authentic Flavors',
         'subheadline' => $hero?->subheadline ?? 'Discover our diverse range of halal cuisines for every occasion',
         'eyebrow' => 'Halal Corporate Catering',
         'ctaText' => '',
@@ -13,90 +13,75 @@
         'backgroundImage' => $hero?->image_url,
     ])
 
-    {{-- Cuisine Category Grid --}}
-    @if($cuisines->count())
-    <section class="py-20 md:py-28 bg-[#0D0D0D]">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="text-center mb-14" data-animate="animate-fade-in-up" data-delay="0s" style="opacity:0;">
-                <span class="text-[#C9A84C] uppercase tracking-[0.3em] text-xs font-medium">Browse by Cuisine</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-white mt-3 font-serif">Our Cuisines</h2>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Each cuisine is carefully crafted with authentic flavors while maintaining strict halal compliance.</p>
-            </div>
+    {{-- Right Content Panel --}}
+    <div class="site-panel-col bg-green-dark marble-overlay">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                @foreach($cuisines as $i => $cuisine)
-                    <a href="{{ route('menu.show', $cuisine->slug) }}"
-                       class="group relative block overflow-hidden rounded-lg shadow-2xl h-[420px] shimmer-effect"
-                       data-animate="animate-fade-in-up" data-delay="{{ $i * 0.15 }}s" style="opacity:0;">
-                        @if($cuisine->image_url)
-                            <img src="{{ $cuisine->image_url }}" alt="{{ $cuisine->name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        @else
-                            <div class="w-full h-full bg-[#111111]"></div>
-                        @endif
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-[#C9A84C] text-xs uppercase tracking-widest font-medium">Halal Compliant</span>
-                            <h3 class="text-white text-3xl font-bold mt-2 font-serif group-hover:text-[#C9A84C] transition-colors duration-300">{{ $cuisine->name }}</h3>
-                            @if($cuisine->description)
-                                <p class="text-gray-300 mt-2 line-clamp-2">{{ $cuisine->description }}</p>
-                            @endif
-                            <div class="mt-4 inline-flex items-center gap-2 text-[#C9A84C] text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                                View Menu
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endif
+        {{-- Special Packages --}}
+        @if($packages->count())
+        <div class="p-8 lg:p-10">
+            <h2 class="text-gold font-serif italic text-xl mb-1">Seasonal & Festive Menus</h2>
+            <div class="w-10 h-px bg-gold/40 mb-6"></div>
 
-    {{-- Special Packages Section --}}
-    @if($packages->count())
-    <section class="py-20 md:py-28 bg-[#0A0A0A]">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="text-center mb-14" data-animate="animate-fade-in-up" data-delay="0s" style="opacity:0;">
-                <span class="text-[#C9A84C] uppercase tracking-[0.3em] text-xs font-medium">Value Deals</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-white mt-3 font-serif">Special Packages</h2>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Curated packages designed for corporate events, conferences, and special occasions.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($packages as $i => $package)
+            <div class="space-y-4">
+                @foreach($packages->take(3) as $package)
                     <a href="{{ route('menu.package', $package->slug) }}"
-                       class="group relative block overflow-hidden rounded-lg shadow-2xl h-[350px] shimmer-effect"
-                       data-animate="animate-fade-in-up" data-delay="{{ $i * 0.1 }}s" style="opacity:0;">
+                       class="group relative block overflow-hidden rounded-lg h-40 shimmer-effect">
                         @if($package->cover_image_url)
                             <img src="{{ $package->cover_image_url }}" alt="{{ $package->name }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         @else
-                            <div class="w-full h-full bg-[#111111]"></div>
+                            <div class="w-full h-full bg-green-mid"></div>
                         @endif
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <span class="text-[#C9A84C] text-xs uppercase tracking-widest font-medium">Package</span>
-                            <h3 class="text-white text-2xl font-bold mt-1 font-serif group-hover:text-[#C9A84C] transition-colors duration-300">{{ $package->name }}</h3>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                            <span class="text-gold text-[10px] uppercase tracking-widest">Package</span>
+                            <h3 class="text-white text-base font-serif italic group-hover:text-gold transition-colors duration-300">{{ $package->name }}</h3>
                             @if($package->tagline)
-                                <p class="text-gray-300 mt-1 text-sm">{{ $package->tagline }}</p>
+                                <p class="text-white/50 text-xs mt-0.5">{{ $package->tagline }}</p>
                             @endif
                         </div>
                     </a>
                 @endforeach
             </div>
         </div>
-    </section>
-    @endif
+        @endif
 
-    {{-- CTA Section --}}
-    <section class="py-20 bg-[#0D0D0D]">
-        <div class="max-w-3xl mx-auto px-6 text-center" data-animate="animate-fade-in-up" data-delay="0s" style="opacity:0;">
-            <span class="text-[#C9A84C] uppercase tracking-[0.3em] text-xs font-medium">Need Something Custom?</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-white mt-3 font-serif">Let Us Craft Your Perfect Menu</h2>
-            <p class="text-gray-400 mt-4">Can't find what you're looking for? We specialize in creating custom menus tailored to your event's requirements and preferences.</p>
-            <a href="{{ route('contact') }}" class="inline-block mt-8 border-2 border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-black px-8 py-3 rounded-sm tracking-widest uppercase text-sm font-semibold transition-all duration-300">
+        {{-- Cuisine Categories --}}
+        @if($cuisines->count())
+        <div class="p-8 lg:p-10 border-t border-white/10">
+            <h3 class="text-gold font-serif italic text-lg mb-4">Our Cuisine Categories</h3>
+            <div class="w-10 h-px bg-gold/40 mb-6"></div>
+
+            <div class="space-y-3">
+                @foreach($cuisines as $cuisine)
+                    <a href="{{ route('menu.show', $cuisine->slug) }}"
+                       class="group flex items-center gap-4 p-3 rounded-lg border border-white/5 hover:border-gold/30 transition-all duration-300">
+                        @if($cuisine->image_url)
+                            <div class="w-16 h-16 rounded overflow-hidden flex-shrink-0">
+                                <img src="{{ $cuisine->image_url }}" alt="{{ $cuisine->name }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                        @endif
+                        <div>
+                            <h4 class="text-white text-sm font-serif italic group-hover:text-gold transition-colors">{{ $cuisine->name }}</h4>
+                            <span class="text-gold/60 text-[10px] uppercase tracking-widest">Halal Compliant</span>
+                            @if($cuisine->description)
+                                <p class="text-white/50 text-xs mt-0.5 line-clamp-1">{{ $cuisine->description }}</p>
+                            @endif
+                        </div>
+                        <svg class="w-4 h-4 text-gold/40 ml-auto flex-shrink-0 group-hover:text-gold transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        {{-- CTA --}}
+        <div class="p-8 lg:p-10 border-t border-white/10 marble-bg text-center">
+            <h3 class="text-green-dark font-serif italic text-lg mb-2">Need Something Custom?</h3>
+            <p class="text-green-dark/70 text-sm mb-4">We specialize in creating custom menus tailored to your event.</p>
+            <a href="{{ route('contact') }}" class="inline-block border border-green-dark/40 text-green-dark hover:bg-green-dark hover:text-white px-6 py-2 uppercase tracking-[0.2em] text-[10px] font-medium transition-all duration-300">
                 Get In Touch
             </a>
         </div>
-    </section>
+    </div>
 
 @endsection
