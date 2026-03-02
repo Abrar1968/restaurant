@@ -8,9 +8,7 @@ use Illuminate\View\View;
 
 class CertificationController extends Controller
 {
-    public function __construct(protected CertificationService $certificationService)
-    {
-    }
+    public function __construct(protected CertificationService $certificationService) {}
 
     public function index(): View
     {

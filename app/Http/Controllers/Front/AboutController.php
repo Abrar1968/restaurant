@@ -8,9 +8,7 @@ use Illuminate\View\View;
 
 class AboutController extends Controller
 {
-    public function __construct(protected AboutPageService $aboutService)
-    {
-    }
+    public function __construct(protected AboutPageService $aboutService) {}
 
     public function index(): View
     {

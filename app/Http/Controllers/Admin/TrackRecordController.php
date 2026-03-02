@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class TrackRecordController extends Controller
 {
-    public function __construct(protected TrackRecordAdminService $trackRecordAdminService)
-    {
-    }
+    public function __construct(protected TrackRecordAdminService $trackRecordAdminService) {}
 
     public function index(): View
     {

@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class HeroController extends Controller
 {
-    public function __construct(protected HeroAdminService $heroAdminService)
-    {
-    }
+    public function __construct(protected HeroAdminService $heroAdminService) {}
 
     public function index(): View
     {

@@ -8,9 +8,7 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function __construct(protected HomePageService $homeService)
-    {
-    }
+    public function __construct(protected HomePageService $homeService) {}
 
     public function index(): View
     {

@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class ContactController extends Controller
 {
-    public function __construct(protected ContactService $contactService)
-    {
-    }
+    public function __construct(protected ContactService $contactService) {}
 
     public function index(): View
     {

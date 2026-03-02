@@ -12,7 +12,7 @@ class ImageUploadService
      */
     public function upload(UploadedFile $file, string $folder, int $maxWidth = 1920): string
     {
-        $filename = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $filename = uniqid().'_'.time().'.'.$file->getClientOriginalExtension();
         $path = "uploads/{$folder}/{$filename}";
 
         Storage::disk('public')->put($path, file_get_contents($file->getRealPath()));

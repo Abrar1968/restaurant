@@ -42,7 +42,7 @@ class TeamMember extends Model
     public function getPhotoUrlAttribute(): ?string
     {
         return $this->photo_path
-            ? asset('storage/' . $this->photo_path)
+            ? asset('storage/'.$this->photo_path)
             : null;
     }
 }

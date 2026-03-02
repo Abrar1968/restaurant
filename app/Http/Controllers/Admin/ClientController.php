@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class ClientController extends Controller
 {
-    public function __construct(protected ClientAdminService $clientAdminService)
-    {
-    }
+    public function __construct(protected ClientAdminService $clientAdminService) {}
 
     public function index(): View
     {

@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class InquiryController extends Controller
 {
-    public function __construct(protected InquiryAdminService $inquiryAdminService)
-    {
-    }
+    public function __construct(protected InquiryAdminService $inquiryAdminService) {}
 
     public function index(): View
     {

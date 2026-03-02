@@ -8,9 +8,7 @@ use Illuminate\View\View;
 
 class TrackRecordController extends Controller
 {
-    public function __construct(protected TrackRecordService $trackRecordService)
-    {
-    }
+    public function __construct(protected TrackRecordService $trackRecordService) {}
 
     public function index(): View
     {

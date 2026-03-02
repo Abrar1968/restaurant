@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class GalleryController extends Controller
 {
-    public function __construct(protected GalleryAdminService $galleryAdminService)
-    {
-    }
+    public function __construct(protected GalleryAdminService $galleryAdminService) {}
 
     public function index(): View
     {

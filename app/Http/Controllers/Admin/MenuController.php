@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class MenuController extends Controller
 {
-    public function __construct(protected MenuAdminService $menuAdminService)
-    {
-    }
+    public function __construct(protected MenuAdminService $menuAdminService) {}
 
     public function index(): View
     {

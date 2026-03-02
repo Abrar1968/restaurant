@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class PackageController extends Controller
 {
-    public function __construct(protected PackageAdminService $packageAdminService)
-    {
-    }
+    public function __construct(protected PackageAdminService $packageAdminService) {}
 
     public function index(): View
     {

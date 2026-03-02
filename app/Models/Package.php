@@ -60,7 +60,7 @@ class Package extends Model
     public function getCoverImageUrlAttribute(): ?string
     {
         return $this->cover_image_path
-            ? asset('storage/' . $this->cover_image_path)
+            ? asset('storage/'.$this->cover_image_path)
             : null;
     }
 }

@@ -21,7 +21,7 @@ class MenuSeeder extends Seeder
 
         foreach ($cuisines as $cuisine) {
             Menu::query()->firstOrCreate(['slug' => $cuisine['slug']], array_merge($cuisine, [
-                'description' => 'Explore our ' . $cuisine['name'] . ' offerings.',
+                'description' => 'Explore our '.$cuisine['name'].' offerings.',
                 'is_active' => true,
             ]));
         }

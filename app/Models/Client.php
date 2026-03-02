@@ -45,7 +45,7 @@ class Client extends Model
     public function getLogoUrlAttribute(): ?string
     {
         return $this->logo_path
-            ? asset('storage/' . $this->logo_path)
+            ? asset('storage/'.$this->logo_path)
             : null;
     }
 }

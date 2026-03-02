@@ -60,7 +60,7 @@ class Menu extends Model
     public function getImageUrlAttribute(): ?string
     {
         return $this->cover_image_path
-            ? asset('storage/' . $this->cover_image_path)
+            ? asset('storage/'.$this->cover_image_path)
             : null;
     }
 }

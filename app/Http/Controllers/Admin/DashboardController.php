@@ -8,9 +8,7 @@ use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function __construct(protected InquiryAdminService $inquiryService)
-    {
-    }
+    public function __construct(protected InquiryAdminService $inquiryService) {}
 
     public function index(): View
     {

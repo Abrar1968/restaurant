@@ -1,19 +1,11 @@
 <?php
 
-use App\Http\Controllers\Front\AboutController;
-use App\Http\Controllers\Front\CertificationController;
-use App\Http\Controllers\Front\ClientController;
-use App\Http\Controllers\Front\ContactController;
-use App\Http\Controllers\Front\GalleryController;
-use App\Http\Controllers\Front\HomeController;
-use App\Http\Controllers\Front\MenuController;
-use App\Http\Controllers\Front\TrackRecordController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
+use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
@@ -23,6 +15,14 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SortController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\TrackRecordController as AdminTrackRecordController;
+use App\Http\Controllers\Front\AboutController;
+use App\Http\Controllers\Front\CertificationController;
+use App\Http\Controllers\Front\ClientController;
+use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Front\GalleryController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\MenuController;
+use App\Http\Controllers\Front\TrackRecordController;
 use Illuminate\Support\Facades\Route;
 
 /*

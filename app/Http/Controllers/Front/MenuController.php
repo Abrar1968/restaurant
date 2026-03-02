@@ -8,9 +8,7 @@ use Illuminate\View\View;
 
 class MenuController extends Controller
 {
-    public function __construct(protected MenuService $menuService)
-    {
-    }
+    public function __construct(protected MenuService $menuService) {}
 
     public function index(): View
     {

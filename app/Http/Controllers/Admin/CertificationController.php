@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class CertificationController extends Controller
 {
-    public function __construct(protected CertificationAdminService $certificationAdminService)
-    {
-    }
+    public function __construct(protected CertificationAdminService $certificationAdminService) {}
 
     public function index(): View
     {

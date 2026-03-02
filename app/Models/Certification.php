@@ -46,7 +46,7 @@ class Certification extends Model
     public function getCertificateImageUrlAttribute(): ?string
     {
         return $this->certificate_image_path
-            ? asset('storage/' . $this->certificate_image_path)
+            ? asset('storage/'.$this->certificate_image_path)
             : null;
     }
 }

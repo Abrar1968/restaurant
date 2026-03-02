@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class TeamController extends Controller
 {
-    public function __construct(protected TeamAdminService $teamAdminService)
-    {
-    }
+    public function __construct(protected TeamAdminService $teamAdminService) {}
 
     public function index(): View
     {
