@@ -23,6 +23,6 @@ class SettingController extends Controller
     {
         $this->settingService->update($request->except('_token'));
 
-        return redirect()->back()->with('success', 'Settings updated successfully.');
+        return redirect()->route('admin.settings')->with('success', 'Settings updated successfully.');
     }
 }

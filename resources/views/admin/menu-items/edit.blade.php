@@ -5,7 +5,7 @@
 <div class="space-y-8" x-data="{ imagePreview: null }">
     {{-- Page Header --}}
     <div class="flex items-center gap-4">
-        <a href="{{ route('admin.menu-items.index') }}" class="text-gray-400 hover:text-white transition">
+        <a href="{{ route('admin.menus.items.index', $menu) }}" class="text-gray-400 hover:text-white transition">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         </a>
         <div>
@@ -26,7 +26,7 @@
     @endif
 
     {{-- Form --}}
-    <form action="{{ route('admin.menu-items.update', $item) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.menus.items.update', [$menu, $item]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -170,7 +170,7 @@
 
             {{-- Submit --}}
             <div class="flex items-center justify-end gap-4 pt-4 border-t border-white/10">
-                <a href="{{ route('admin.menu-items.index') }}" class="text-gray-400 hover:text-white text-sm transition">Cancel</a>
+                <a href="{{ route('admin.menus.items.index', $menu) }}" class="text-gray-400 hover:text-white text-sm transition">Cancel</a>
                 <button type="submit" class="bg-[#C9A84C] hover:bg-[#b8993f] text-black font-semibold px-6 py-2.5 rounded transition">
                     Update Item
                 </button>

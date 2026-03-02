@@ -31,6 +31,14 @@ class TeamAdminService
     }
 
     /**
+     * Find a team member by ID or fail (alias).
+     */
+    public function findOrFail(int $id): TeamMember
+    {
+        return $this->find($id);
+    }
+
+    /**
      * Create a new team member with optional photo upload.
      *
      * @param  array<string, mixed>  $data

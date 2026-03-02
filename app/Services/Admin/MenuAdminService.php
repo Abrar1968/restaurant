@@ -37,9 +37,15 @@ class MenuAdminService
      */
     public function findMenu(int $id): Menu
     {
-        return $this->menuRepo->findBySlug(
-            Menu::query()->findOrFail($id)->slug
-        );
+        return Menu::query()->with(['categories', 'items'])->findOrFail($id);
+    }
+
+    /**
+     * Find a menu by ID or fail (alias).
+     */
+    public function findMenuOrFail(int $id): Menu
+    {
+        return $this->findMenu($id);
     }
 
     /**
@@ -150,6 +156,22 @@ class MenuAdminService
     }
 
     /**
+     * Find a menu item by ID or fail (alias).
+     */
+    public function findMenuItemOrFail(int $id): MenuItem
+    {
+        return $this->findItem($id);
+    }
+
+    /**
+     * Get all items for a specific menu.
+     */
+    public function getMenuItems(int $menuId): Collection
+    {
+        return $this->menuItemRepo->getForMenu($menuId);
+    }
+
+    /**
      * Create a new menu item with optional image.
      *
      * @param  array<string, mixed>  $data
@@ -161,6 +183,18 @@ class MenuAdminService
         }
 
         return $this->menuItemRepo->create($data);
+    }
+
+    /**
+     * Create a new menu item (alias for controllers).
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public function createMenuItem(int $menuId, array $data, ?UploadedFile $image = null): MenuItem
+    {
+        $data['menu_id'] = $menuId;
+
+        return $this->createItem($data, $image);
     }
 
     /**
@@ -179,6 +213,16 @@ class MenuAdminService
     }
 
     /**
+     * Update a menu item (alias for controllers).
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public function updateMenuItem(int $id, array $data, ?UploadedFile $image = null): MenuItem
+    {
+        return $this->updateItem($id, $data, $image);
+    }
+
+    /**
      * Delete a menu item and its image.
      */
     public function deleteItem(int $id): void
@@ -186,5 +230,13 @@ class MenuAdminService
         $item = $this->menuItemRepo->findOrFail($id);
         $this->imageUploadService->delete($item->image_path);
         $this->menuItemRepo->delete($id);
+    }
+
+    /**
+     * Delete a menu item (alias for controllers).
+     */
+    public function deleteMenuItem(int $id): void
+    {
+        $this->deleteItem($id);
     }
 }

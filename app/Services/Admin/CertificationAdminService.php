@@ -31,6 +31,14 @@ class CertificationAdminService
     }
 
     /**
+     * Find a certification by ID or fail (alias).
+     */
+    public function findOrFail(int $id): Certification
+    {
+        return $this->find($id);
+    }
+
+    /**
      * Create a new certification with optional image upload.
      *
      * @param  array<string, mixed>  $data

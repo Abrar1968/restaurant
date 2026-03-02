@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class SortController extends Controller
 {
@@ -23,11 +22,9 @@ class SortController extends Controller
             return response()->json(['message' => 'Invalid model type.'], 422);
         }
 
-        DB::transaction(function () use ($modelClass, $request): void {
-            foreach ($request->input('ids') as $sortOrder => $id) {
-                $modelClass::where('id', $id)->update(['sort_order' => $sortOrder]);
-            }
-        });
+        foreach ($request->input('ids') as $sortOrder => $id) {
+            $modelClass::query()->where('id', $id)->update(['sort_order' => $sortOrder]);
+        }
 
         return response()->json(['message' => 'Sort order updated successfully.']);
     }

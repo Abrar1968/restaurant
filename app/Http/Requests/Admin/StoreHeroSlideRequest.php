@@ -22,7 +22,7 @@ class StoreHeroSlideRequest extends FormRequest
             'headline' => ['nullable', 'string'],
             'subheadline' => ['nullable', 'string'],
             'cta_text' => ['nullable', 'string', 'max:100'],
-            'cta_url' => ['nullable', 'url', 'max:255'],
+            'cta_url' => ['nullable', 'string', 'max:255'],
             'sort_order' => ['integer', 'min:0'],
             'is_active' => ['boolean'],
         ];

@@ -21,6 +21,14 @@ class InquiryAdminService
     }
 
     /**
+     * Get all contact inquiries paginated (alias).
+     */
+    public function getPaginated(): LengthAwarePaginator
+    {
+        return $this->getAll();
+    }
+
+    /**
      * Get the count of new (unread) inquiries.
      */
     public function getNewCount(): int
@@ -29,11 +37,35 @@ class InquiryAdminService
     }
 
     /**
+     * Get the count of new (unread) inquiries (alias).
+     */
+    public function getNewInquiryCount(): int
+    {
+        return $this->getNewCount();
+    }
+
+    /**
      * Find a contact inquiry by ID.
      */
     public function find(int $id): ContactInquiry
     {
         return $this->contactInquiryRepo->findOrFail($id);
+    }
+
+    /**
+     * Find a contact inquiry by ID or fail (alias).
+     */
+    public function findOrFail(int $id): ContactInquiry
+    {
+        return $this->find($id);
+    }
+
+    /**
+     * Mark an inquiry as read.
+     */
+    public function markAsRead(int $id): ContactInquiry
+    {
+        return $this->contactInquiryRepo->updateStatus($id, 'read');
     }
 
     /**

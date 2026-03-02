@@ -9,7 +9,7 @@
             <h1 class="text-2xl font-bold text-white">Menu Items</h1>
             <p class="text-gray-400 mt-1">Manage individual menu items across all categories</p>
         </div>
-        <a href="{{ route('admin.menu-items.create') }}" class="bg-[#C9A84C] hover:bg-[#b8993f] text-black font-semibold px-4 py-2 rounded transition">
+        <a href="{{ route('admin.menus.items.create', $menu) }}" class="bg-[#C9A84C] hover:bg-[#b8993f] text-black font-semibold px-4 py-2 rounded transition">
             + Add New Item
         </a>
     </div>
@@ -19,14 +19,14 @@
         <div class="flex items-center gap-4">
             <label class="text-sm font-medium text-gray-400">Filter by Menu:</label>
             <div class="flex flex-wrap items-center gap-2">
-                <a href="{{ route('admin.menu-items.index') }}"
+                <a href="{{ route('admin.menus.items.index', $menu) }}"
                    class="px-3 py-1.5 rounded text-sm transition {{ !request('menu') ? 'bg-[#C9A84C] text-black font-semibold' : 'bg-[#1A1A1A] text-gray-300 hover:text-white' }}">
                     All
                 </a>
-                @foreach($menus as $menu)
-                    <a href="{{ route('admin.menu-items.index', ['menu' => $menu->id]) }}"
-                       class="px-3 py-1.5 rounded text-sm transition {{ request('menu') == $menu->id ? 'bg-[#C9A84C] text-black font-semibold' : 'bg-[#1A1A1A] text-gray-300 hover:text-white' }}">
-                        {{ $menu->name }}
+                @foreach($menus as $filterMenu)
+                    <a href="{{ route('admin.menus.items.index', $filterMenu) }}"
+                       class="px-3 py-1.5 rounded text-sm transition {{ request('menu') == $filterMenu->id ? 'bg-[#C9A84C] text-black font-semibold' : 'bg-[#1A1A1A] text-gray-300 hover:text-white' }}">
+                        {{ $filterMenu->name }}
                     </a>
                 @endforeach
             </div>
@@ -94,11 +94,11 @@
                         {{-- Actions --}}
                         <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('admin.menu-items.edit', $item) }}"
+                                <a href="{{ route('admin.menus.items.edit', [$item->menu_id, $item]) }}"
                                    class="bg-[#C9A84C]/10 text-[#C9A84C] hover:bg-[#C9A84C]/20 px-3 py-1.5 rounded text-sm transition">
                                     Edit
                                 </a>
-                                <form action="{{ route('admin.menu-items.destroy', $item) }}" method="POST"
+                                <form action="{{ route('admin.menus.items.destroy', [$item->menu_id, $item]) }}" method="POST"
                                       onsubmit="return confirm('Are you sure you want to delete this item?')">
                                     @csrf
                                     @method('DELETE')
@@ -115,7 +115,7 @@
                             <div class="text-gray-500">
                                 <svg class="w-12 h-12 mx-auto mb-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                                 <p class="text-sm">No menu items found.</p>
-                                <a href="{{ route('admin.menu-items.create') }}" class="text-[#C9A84C] text-sm hover:underline mt-1 inline-block">Add your first item →</a>
+                                <a href="{{ route('admin.menus.items.create', $menu) }}" class="text-[#C9A84C] text-sm hover:underline mt-1 inline-block">Add your first item →</a>
                             </div>
                         </td>
                     </tr>
@@ -125,7 +125,7 @@
     </div>
 
     {{-- Pagination --}}
-    @if($items->hasPages())
+    @if($items instanceof \Illuminate\Contracts\Pagination\Paginator && $items->hasPages())
         <div class="mt-6">
             {{ $items->links() }}
         </div>

@@ -29,13 +29,27 @@ class PackageAdminService
     }
 
     /**
+     * Get all packages (alias).
+     */
+    public function getAll(): Collection
+    {
+        return $this->getAllPackages();
+    }
+
+    /**
      * Find a package by ID with eager loaded relations.
      */
     public function findPackage(int $id): Package
     {
-        return $this->packageRepo->findBySlug(
-            Package::query()->findOrFail($id)->slug
-        );
+        return Package::query()->with(['items', 'images'])->findOrFail($id);
+    }
+
+    /**
+     * Find a package by ID (alias).
+     */
+    public function findOrFail(int $id): Package
+    {
+        return $this->findPackage($id);
     }
 
     /**
@@ -50,6 +64,16 @@ class PackageAdminService
         }
 
         return $this->packageRepo->create($data);
+    }
+
+    /**
+     * Create a new package (alias).
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public function create(array $data, ?UploadedFile $image = null): Package
+    {
+        return $this->createPackage($data, $image);
     }
 
     /**
@@ -68,6 +92,16 @@ class PackageAdminService
     }
 
     /**
+     * Update a package (alias).
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public function update(int $id, array $data, ?UploadedFile $image = null): Package
+    {
+        return $this->updatePackage($id, $data, $image);
+    }
+
+    /**
      * Delete a package, its cover image, and all associated package images.
      */
     public function deletePackage(int $id): void
@@ -80,6 +114,14 @@ class PackageAdminService
         }
 
         $this->packageRepo->delete($id);
+    }
+
+    /**
+     * Delete a package (alias).
+     */
+    public function delete(int $id): void
+    {
+        $this->deletePackage($id);
     }
 
     // ──────────────────────────────────────────────

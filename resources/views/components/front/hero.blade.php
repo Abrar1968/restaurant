@@ -20,7 +20,7 @@
     {{-- Content --}}
     <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
         @if($eyebrow)
-            <span class="text-[#C9A84C] uppercase tracking-[0.3em] text-sm font-medium animate-fade-in" data-animate="animate-fade-in" data-delay="0s">
+            <span class="text-[#C9A84C] uppercase tracking-[0.3em] text-sm font-medium" data-animate="animate-fade-in" data-delay="0s" style="opacity:0;">
                 {{ $eyebrow }}
             </span>
         @endif
@@ -46,11 +46,12 @@
             </div>
         @endif
 
-        {{-- Scroll indicator --}}
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <svg class="w-6 h-6 text-[#C9A84C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-            </svg>
-        </div>
+    </div>
+
+    {{-- Scroll indicator --}}
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <svg class="w-6 h-6 text-[#C9A84C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
     </div>
 </section>

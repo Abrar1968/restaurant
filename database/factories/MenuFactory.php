@@ -18,10 +18,17 @@ class MenuFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->unique()->randomElement(['Malay Cuisine', 'Chinese Cuisine', 'Indian Cuisine', 'Western Cuisine', 'Japanese Cuisine', 'Thai Cuisine']);
+        $cuisineMap = [
+            'malay' => 'malay', 'chinese' => 'chinese', 'indian' => 'indian',
+            'western' => 'western', 'japanese' => 'other', 'thai' => 'other',
+        ];
+        $firstWord = strtolower(explode(' ', $name)[0]);
+
         return [
-            'name' => fake()->randomElement(['Malay Cuisine', 'Chinese Cuisine', 'Indian Cuisine', 'Western Cuisine']),
-            'slug' => fn (array $attrs) => Str::slug($attrs['name']),
-            'cuisine_type' => fn (array $attrs) => strtolower(explode(' ', $attrs['name'])[0]),
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'cuisine_type' => $cuisineMap[$firstWord] ?? 'other',
             'description' => fake()->paragraph(3),
             'cover_image_path' => null,
             'is_active' => true,

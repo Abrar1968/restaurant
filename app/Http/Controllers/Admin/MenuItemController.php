@@ -14,15 +14,16 @@ class MenuItemController extends Controller
 
     public function index(int $menuId): View
     {
-        return view('admin.menus.items.index', [
+        return view('admin.menu-items.index', [
             'menu' => $this->menuAdminService->findMenuOrFail($menuId),
             'items' => $this->menuAdminService->getMenuItems($menuId),
+            'menus' => $this->menuAdminService->getAllMenus(),
         ]);
     }
 
     public function create(int $menuId): View
     {
-        return view('admin.menus.items.create', [
+        return view('admin.menu-items.create', [
             'menu' => $this->menuAdminService->findMenuOrFail($menuId),
         ]);
     }
@@ -40,7 +41,7 @@ class MenuItemController extends Controller
 
     public function edit(int $menuId, int $itemId): View
     {
-        return view('admin.menus.items.edit', [
+        return view('admin.menu-items.edit', [
             'menu' => $this->menuAdminService->findMenuOrFail($menuId),
             'item' => $this->menuAdminService->findMenuItemOrFail($itemId),
         ]);

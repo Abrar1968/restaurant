@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Collection;
 class HeroRepository
 {
     /**
-     * Get active hero slides for a specific page.
+     * Get the first active hero slide for a specific page.
      */
-    public function getActiveForPage(string $page): Collection
+    public function getActiveForPage(string $page): ?HeroSlide
     {
         return HeroSlide::query()
             ->where('page', $page)
             ->where('is_active', true)
             ->orderBy('sort_order')
-            ->get();
+            ->first();
     }
 
     /**

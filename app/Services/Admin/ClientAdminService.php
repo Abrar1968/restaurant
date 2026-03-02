@@ -31,6 +31,14 @@ class ClientAdminService
     }
 
     /**
+     * Find a client by ID or fail (alias).
+     */
+    public function findOrFail(int $id): Client
+    {
+        return $this->find($id);
+    }
+
+    /**
      * Create a new client with optional logo upload.
      *
      * @param  array<string, mixed>  $data

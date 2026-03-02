@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('hero_slides', function (Blueprint $table) {
             $table->id();
             $table->string('page', 50)->index();
-            $table->string('image_path', 255);
+            $table->string('image_path', 255)->nullable();
             $table->text('headline')->nullable();
             $table->text('subheadline')->nullable();
             $table->string('cta_text', 100)->nullable();

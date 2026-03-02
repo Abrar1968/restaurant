@@ -111,9 +111,9 @@
         <div class="flex flex-wrap items-center gap-3">
             {{-- Mark as Read --}}
             @if($inquiry->status === 'new')
-                <form action="{{ route('admin.inquiries.update', $inquiry) }}" method="POST">
+                <form action="{{ route('admin.inquiries.status', $inquiry) }}" method="POST">
                     @csrf
-                    @method('PUT')
+                    @method('PATCH')
                     <input type="hidden" name="status" value="read">
                     <button type="submit"
                             class="bg-[#C9A84C] hover:bg-[#b8993f] text-black font-semibold px-4 py-2 rounded transition">
@@ -124,9 +124,9 @@
 
             {{-- Mark as Replied --}}
             @if($inquiry->status !== 'replied')
-                <form action="{{ route('admin.inquiries.update', $inquiry) }}" method="POST">
+                <form action="{{ route('admin.inquiries.status', $inquiry) }}" method="POST">
                     @csrf
-                    @method('PUT')
+                    @method('PATCH')
                     <input type="hidden" name="status" value="replied">
                     <button type="submit"
                             class="border border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-black px-4 py-2 rounded transition">

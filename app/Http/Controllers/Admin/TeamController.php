@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreTeamMemberRequest;
 use App\Services\Admin\TeamAdminService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TeamController extends Controller
@@ -24,10 +24,10 @@ class TeamController extends Controller
         return view('admin.team.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreTeamMemberRequest $request): RedirectResponse
     {
         $this->teamAdminService->create(
-            $request->all(),
+            $request->validated(),
             $request->file('photo'),
         );
 
@@ -41,11 +41,11 @@ class TeamController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(StoreTeamMemberRequest $request, int $id): RedirectResponse
     {
         $this->teamAdminService->update(
             $id,
-            $request->all(),
+            $request->validated(),
             $request->file('photo'),
         );
 

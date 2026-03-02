@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreGalleryCategoryRequest;
 use App\Services\Admin\GalleryAdminService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class GalleryCategoryController extends Controller
@@ -14,33 +14,33 @@ class GalleryCategoryController extends Controller
 
     public function index(): View
     {
-        return view('admin.gallery.categories.index', [
+        return view('admin.gallery-categories.index', [
             'categories' => $this->galleryAdminService->getAllCategories(),
         ]);
     }
 
     public function create(): View
     {
-        return view('admin.gallery.categories.create');
+        return view('admin.gallery-categories.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreGalleryCategoryRequest $request): RedirectResponse
     {
-        $this->galleryAdminService->createCategory($request->all());
+        $this->galleryAdminService->createCategory($request->validated());
 
         return redirect()->route('admin.gallery-categories.index')->with('success', 'Gallery category created successfully.');
     }
 
     public function edit(int $id): View
     {
-        return view('admin.gallery.categories.edit', [
+        return view('admin.gallery-categories.edit', [
             'category' => $this->galleryAdminService->findCategoryOrFail($id),
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(StoreGalleryCategoryRequest $request, int $id): RedirectResponse
     {
-        $this->galleryAdminService->updateCategory($id, $request->all());
+        $this->galleryAdminService->updateCategory($id, $request->validated());
 
         return redirect()->route('admin.gallery-categories.index')->with('success', 'Gallery category updated successfully.');
     }

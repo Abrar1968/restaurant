@@ -4,18 +4,27 @@ namespace App\Services\Admin;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ImageUploadService
 {
     /**
-     * Upload an image file to the specified folder.
+     * Upload an image file to the specified folder with optional resizing.
      */
     public function upload(UploadedFile $file, string $folder, int $maxWidth = 1920): string
     {
-        $filename = uniqid().'_'.time().'.'.$file->getClientOriginalExtension();
+        $filename = uniqid().'_'.time().'.jpg';
         $path = "uploads/{$folder}/{$filename}";
 
-        Storage::disk('public')->put($path, file_get_contents($file->getRealPath()));
+        $image = Image::read($file->getRealPath());
+
+        if ($image->width() > $maxWidth) {
+            $image->scaleDown(width: $maxWidth);
+        }
+
+        $encoded = $image->toJpeg(85);
+
+        Storage::disk('public')->put($path, (string) $encoded);
 
         return $path;
     }

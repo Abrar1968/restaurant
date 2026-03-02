@@ -31,6 +31,14 @@ class TrackRecordAdminService
     }
 
     /**
+     * Find a track record by ID or fail (alias).
+     */
+    public function findOrFail(int $id): TrackRecord
+    {
+        return $this->find($id);
+    }
+
+    /**
      * Create a new track record with optional image upload.
      *
      * @param  array<string, mixed>  $data

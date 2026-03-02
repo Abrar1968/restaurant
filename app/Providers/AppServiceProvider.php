@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\SettingRepository;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer(['layouts.front', 'components.front.*'], function ($view) {
+            $settings = app(SettingRepository::class)->getAll();
+            $view->with('settings', $settings);
+        });
     }
 }

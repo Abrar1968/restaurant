@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StorePackageRequest;
 use App\Services\Admin\PackageAdminService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PackageController extends Controller
@@ -24,10 +24,10 @@ class PackageController extends Controller
         return view('admin.packages.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StorePackageRequest $request): RedirectResponse
     {
         $this->packageAdminService->create(
-            $request->all(),
+            $request->validated(),
             $request->file('image'),
         );
 
@@ -41,11 +41,11 @@ class PackageController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(StorePackageRequest $request, int $id): RedirectResponse
     {
         $this->packageAdminService->update(
             $id,
-            $request->all(),
+            $request->validated(),
             $request->file('image'),
         );
 

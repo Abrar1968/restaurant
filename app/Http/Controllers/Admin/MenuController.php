@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreMenuRequest;
 use App\Services\Admin\MenuAdminService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MenuController extends Controller
@@ -24,10 +24,11 @@ class MenuController extends Controller
         return view('admin.menus.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreMenuRequest $request): RedirectResponse
     {
         $this->menuAdminService->createMenu(
-            $request->validated() ?: $request->all(),
+            $request->validated(),
+            $request->file('image'),
         );
 
         return redirect()->route('admin.menus.index')->with('success', 'Menu created successfully.');
@@ -40,11 +41,12 @@ class MenuController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(StoreMenuRequest $request, int $id): RedirectResponse
     {
         $this->menuAdminService->updateMenu(
             $id,
-            $request->validated() ?: $request->all(),
+            $request->validated(),
+            $request->file('image'),
         );
 
         return redirect()->route('admin.menus.index')->with('success', 'Menu updated successfully.');

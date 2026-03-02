@@ -15,7 +15,7 @@ class HeroController extends Controller
     public function index(): View
     {
         return view('admin.hero-slides.index', [
-            'heroSlides' => $this->heroAdminService->getAll(),
+            'slides' => $this->heroAdminService->getAll(),
         ]);
     }
 
@@ -37,7 +37,7 @@ class HeroController extends Controller
     public function edit(int $id): View
     {
         return view('admin.hero-slides.edit', [
-            'heroSlide' => $this->heroAdminService->findOrFail($id),
+            'slide' => $this->heroAdminService->findOrFail($id),
         ]);
     }
 

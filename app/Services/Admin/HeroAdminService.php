@@ -15,6 +15,14 @@ class HeroAdminService
     ) {}
 
     /**
+     * Get all hero slides across all pages.
+     */
+    public function getAll(): Collection
+    {
+        return HeroSlide::query()->orderBy('sort_order')->get();
+    }
+
+    /**
      * Get all hero slides for a specific page.
      */
     public function getAllForPage(string $page): Collection
@@ -26,6 +34,14 @@ class HeroAdminService
      * Find a hero slide by ID.
      */
     public function find(int $id): HeroSlide
+    {
+        return $this->heroRepo->findOrFail($id);
+    }
+
+    /**
+     * Find a hero slide by ID or fail.
+     */
+    public function findOrFail(int $id): HeroSlide
     {
         return $this->heroRepo->findOrFail($id);
     }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreTrackRecordRequest;
 use App\Services\Admin\TrackRecordAdminService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TrackRecordController extends Controller
@@ -24,10 +24,10 @@ class TrackRecordController extends Controller
         return view('admin.track-records.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreTrackRecordRequest $request): RedirectResponse
     {
         $this->trackRecordAdminService->create(
-            $request->all(),
+            $request->validated(),
             $request->file('image'),
         );
 
@@ -41,11 +41,11 @@ class TrackRecordController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(StoreTrackRecordRequest $request, int $id): RedirectResponse
     {
         $this->trackRecordAdminService->update(
             $id,
-            $request->all(),
+            $request->validated(),
             $request->file('image'),
         );
 

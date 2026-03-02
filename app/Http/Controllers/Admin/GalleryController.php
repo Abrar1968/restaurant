@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreGalleryImageRequest;
 use App\Services\Admin\GalleryAdminService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class GalleryController extends Controller
@@ -16,6 +16,7 @@ class GalleryController extends Controller
     {
         return view('admin.gallery.index', [
             'images' => $this->galleryAdminService->getAllImages(),
+            'categories' => $this->galleryAdminService->getAllCategories(),
         ]);
     }
 
@@ -26,10 +27,10 @@ class GalleryController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreGalleryImageRequest $request): RedirectResponse
     {
         $this->galleryAdminService->createImage(
-            $request->all(),
+            $request->validated(),
             $request->file('image'),
         );
 
@@ -44,11 +45,11 @@ class GalleryController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(StoreGalleryImageRequest $request, int $id): RedirectResponse
     {
         $this->galleryAdminService->updateImage(
             $id,
-            $request->all(),
+            $request->validated(),
             $request->file('image'),
         );
 

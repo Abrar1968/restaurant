@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreCertificationRequest;
 use App\Services\Admin\CertificationAdminService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CertificationController extends Controller
@@ -24,10 +24,10 @@ class CertificationController extends Controller
         return view('admin.certifications.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreCertificationRequest $request): RedirectResponse
     {
         $this->certificationAdminService->create(
-            $request->all(),
+            $request->validated(),
             $request->file('image'),
         );
 
@@ -41,11 +41,11 @@ class CertificationController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(StoreCertificationRequest $request, int $id): RedirectResponse
     {
         $this->certificationAdminService->update(
             $id,
-            $request->all(),
+            $request->validated(),
             $request->file('image'),
         );
 

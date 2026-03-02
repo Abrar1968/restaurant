@@ -20,7 +20,7 @@ class GalleryImageFactory extends Factory
     {
         return [
             'gallery_category_id' => GalleryCategory::factory(),
-            'image_path' => null,
+            'image_path' => 'gallery/test-image-'.fake()->uuid().'.jpg',
             'caption' => fake()->optional()->sentence(4),
             'alt_text' => fake()->optional()->sentence(4),
             'sort_order' => fake()->numberBetween(0, 50),

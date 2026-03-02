@@ -36,6 +36,14 @@ class GalleryAdminService
     }
 
     /**
+     * Find a gallery category by ID or fail (alias).
+     */
+    public function findCategoryOrFail(int $id): GalleryCategory
+    {
+        return $this->findCategory($id);
+    }
+
+    /**
      * Create a new gallery category.
      *
      * @param  array<string, mixed>  $data
@@ -81,6 +89,14 @@ class GalleryAdminService
     public function findImage(int $id): GalleryImage
     {
         return $this->galleryRepo->findImageOrFail($id);
+    }
+
+    /**
+     * Find a gallery image by ID or fail (alias).
+     */
+    public function findImageOrFail(int $id): GalleryImage
+    {
+        return $this->findImage($id);
     }
 
     /**
