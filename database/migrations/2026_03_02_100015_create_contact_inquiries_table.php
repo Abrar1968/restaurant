@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('contact_inquiries', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 200);
+            $table->string('company', 200)->nullable();
+            $table->string('email', 200);
+            $table->string('phone', 50)->nullable();
+            $table->string('event_type', 100)->nullable();
+            $table->integer('expected_guests')->nullable();
+            $table->date('event_date')->nullable();
+            $table->text('message');
+            $table->enum('status', ['new', 'read', 'replied'])->default('new');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('contact_inquiries');
+    }
+};
